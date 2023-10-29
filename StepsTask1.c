@@ -19,7 +19,7 @@ typedef struct {
 void tokeniseRecord(const char *input, const char *delimiter,
                     char *date, char *time, char *steps) {
     // Create a copy of the input string as strtok modifies the string
-    char *inputCopy = strdup(input);|
+    char *inputCopy = strdup(input);
     
     // Tokenize the copied string
     char *token = strtok(inputCopy, delimiter);
@@ -43,8 +43,9 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
+    printf("penis");
     int count = 0;
-    FILE *file = fopen("filename", "r"); //change from filename
+    FILE *file = fopen("FitnessData_2023.csv", "r"); //change from filename
     if (file == NULL){
         perror("");
         return 1;
@@ -54,9 +55,13 @@ int main() {
             count++;
         }
     }
-    FITNESS_DATA Array[count]
-    for (int a = 0; a < count; a++){
+    printf("%d\n", count);
+    FITNESS_DATA Array[count];
+    for(int a = 0; a < count; a++){
         printf("%d\n",count);
     }
 
+
+    fclose(file);
+    return 0;
 }
