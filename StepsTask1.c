@@ -43,7 +43,8 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-    printf("penis");
+    int buffer_size = 100;
+    char line_buffer[buffer_size];
     int count = 0;
     FILE *file = fopen("FitnessData_2023.csv", "r"); //change from filename
     if (file == NULL){
@@ -51,16 +52,33 @@ int main() {
         return 1;
     }
     else{
-        while(!feof(file)){
+        while(fgets(line_buffer, buffer_size, file) != NULL){
             count++;
         }
     }
-    printf("%d\n", count);
+    rewind(file);  //code is from suggestion from chatgbt
+   
     FITNESS_DATA Array[count];
-    for(int a = 0; a < count; a++){
-        printf("%d\n",count);
+
+    if (file == NULL){
+        perror("");
+        return 1;
+    }
+    else{
+        char date[11];
+        char time[6];
+        char steps[10];
+        int stepsint;
+
+        while(fgets(line_buffer, buffer_size, file) != NULL){
+            printf("%s", line_buffer);
+            tokeniseRecord(line_buffer, ",", date, time, steps);
+        }
     }
 
+    printf("\n%d\n", count);
+    
+    
 
     fclose(file);
     return 0;
