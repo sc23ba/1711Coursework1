@@ -46,6 +46,7 @@ int main() {
     int buffer_size = 100;
     char line_buffer[buffer_size];
     int count = 0;
+    
     FILE *file = fopen("FitnessData_2023.csv", "r"); //change from filename
     if (file == NULL){
         perror("");
@@ -59,6 +60,7 @@ int main() {
     rewind(file);  //code is from suggestion from chatgbt
    
     FITNESS_DATA Array[count];
+    count = 0;
 
     if (file == NULL){
         perror("");
@@ -71,15 +73,20 @@ int main() {
         int stepsint;
 
         while(fgets(line_buffer, buffer_size, file) != NULL){
-            printf("%s", line_buffer);
             tokeniseRecord(line_buffer, ",", date, time, steps);
+            stepsint = atoi(steps);
+            strcpy(Array[count].date, date);
+            strcpy(Array[count].time, time);
+            Array[count].steps = stepsint;
+            count++;
+
         }
     }
 
-    printf("\n%d\n", count);
-    
-    
-
+    printf("\nNumber of records in file: %d\n", count);
+    for (count = 0; count < 3; count++) {
+        printf("%s/%s/%d\n",Array[count].date, Array[count].time, Array[count].steps);
+    }
     fclose(file);
     return 0;
 }
